@@ -1,0 +1,27 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[latin1]{inputenc}
+\begin{document}
+\newcommand{\composer}[1]{\begin{flushright}{\textsl{#1}}\end{flushright}}
+\newcommand{\lilytitle}[2]{\begin{center}{\LARGE{\textbf{#1}}\\\Large{#2}}\end{center}}
+\newcommand{\lilycontentsline}[1]{\addcontentsline{toc}{section}{#1}}
+\lilycontentsline{IIII. If my complaints}
+\lilytitle{IIII. If my complaints}{Cantus}
+\composer{ John Dowland}
+\lilypondfile{cantus.ly}
+\footnotetext[1]{ original has quarter note}
+\clearpage
+\lilytitle{IIII. If my complaints}{Altus}
+\composer{ John Dowland}
+\lilypondfile{altus.ly}
+\footnotetext{Yes, he really has two flats for the altus and only one on the other parts.}
+\clearpage
+\lilytitle{IIII. If my complaints}{Tenor}
+\composer{ John Dowland}
+\lilypondfile{tenor.ly}
+\clearpage
+\lilytitle{IIII. If my complaints}{Bassus}
+\composer{ John Dowland}
+\lilypondfile{bassus.ly}
+\footnotetext[1]{Rest is editorial.}
+\clearpage
+\end{document}
