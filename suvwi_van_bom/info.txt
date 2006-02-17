@@ -1,0 +1,181 @@
+ABOUT THE SONG
+
+    The {SuvwI' van bom} ("The Warrior's Anthem") was written 1997 by Hilary
+    J. Bader, and translated into Klingon by Marc Okrand. The song is briefly
+    mentioned in "Klingon for the Galactic Traveler" on page 197. It enjoys a
+    some popularity in the Klingonist community, or at least by those who like
+    to sing in those circles.
+
+    The song was first heard in the Star Trek: The Next Generation episode
+    "Birthright, Part II", and was then translated into Klingon for use on the
+    CD­ROM game "Star Trek: Klingon", after that it has also been heard in the
+    Star Trek: Deep Space Nine episode "Soldiers of the Empire".
+
+FILE LIST
+
+    info.txt            - this file
+    suvwi_van_bom.ly    - handwritten Lilypond file
+    suvwi_van_bom.mid   - Lilypond MIDI output, corrected using Rosegarden
+    suvwi_van_bom.ogg   - Tagged Ogg file version of above MIDI file
+    suvwi_van_bom.pdf   - Musical score in PDF format
+    suvwi_van_bom.ps    - Musical score in PostScript format
+    suvwi_van_bom.rg    - Rosegarden save file
+    suvwi_van_bom.tags  - handwritten tags applied to Ogg file
+    suvwi_van_bom.txt   - some more info on {SuvwI' van bom}
+
+AUTHOR
+
+    Zrajm C Akfohg <zrajm@klingonska.org> (known among klingonists as
+    {maHvatlh}, the founder of "Klingonska Akademien") created these files in
+    February 2006, partly to get practice at using the programs involved,
+    partly because, well, it's the only Klingon song for which theres notes to
+    typeset.
+
+    For more songs in Klingon, take a look at:
+
+        http://klingonska.org/songs/
+
+    Klingonska Akademien's web site is also a resource not to miss when it
+    comes to all things of the Klingon language (there are a lot of
+    internationally relevant stuff in English, as well as some more locally
+    oriented material presented in Swedish):
+
+        http://klingonska.org/
+
+SOFTWARE
+
+    This song was typset using the Lilypond 2.6.5 sofware. The MIDI file
+    created by Lilypond was then imported into Rosegarden4 1.0 and the
+    required slurs and ties were added by hand. TiMidity++ 2.13.2 and Eric A.
+    Welsh's sound font was used in the MIDI-to-ogg conversion.
+
+LICENSE
+
+    All files in this directory (or archive) are all distributable under the
+    Creative Commons "Attribution-ShareAlike 2.5" (or later) license. For more
+    info see:
+
+        http://creativecommons.org/licenses/by-sa/2.5/
+
+------------------------------------------------------------------------------
+
+FROM THE "KLINGON - FAQ"
+
+2.15 Where can I get the words to the Warrior's Anthem?
+
+(Thanks to Steven Boozer for providing this entry, 5/29/98.)
+
+This is a song from the Star Trek: Klingon CD-ROM from Simon & Schuster
+Interactive. It later appeared in the DS9 episode Soldiers of the Empire.
+
+KCD executive producer Keith Halper explains how the song was written:
+
+    "The way that was that Hilary [Bader] wrote something in English, then she
+    faxed it out to Mark Okrand. Then Okrand translated it to Klingon and put
+    his literal translation below the Klingon verses. The literal translation
+    is always skewed a bit, so if you send him `Row, row, row your boat,'
+    you'll get back `Propel, propel, propel your craft.'" (STK: 212)
+
+There are a few different formats.
+
+    * Closed Captions (presumably also what the actors were reading)
+    * Original Lyrics
+    * Okrand's Translation
+
+Closed Captions
+
+    First, as they enter warp at the start of their mission:
+
+    [Worf begins by pounding fist rhythmically on console]
+
+    KOI KEH LESS POOK LOAD
+
+    [Dax joins in]
+
+    KOI POOK BEH POO
+    YOCH BOW MATH BOW JE SHUV WEE
+    SAY MOACH CHU MAY EW
+    MAH SHOOV MAH NONG EJ MA CHOCH CHEW
+
+    [crew joins in]
+
+    NEE BEH YIN MAHJ ACH WOV COO
+    BATH MA CHETH BEJJ EJ YO KEEJ
+    DAHK VAV POO MA DEE MUV
+    PA RECH MA SHOOV TACH KOO
+    MA MEV KO MA SHOOV TACH MA OV
+    KOI KEH LESS POOK LOAD
+    KOI POOK BEH POO...
+
+    [fade out]
+
+    Second, as the crew prepares to cross the Cardassian border:
+
+    [Tavana begins by pounding fist rhythmically on console]
+
+    KOI KEH LESS POOK LOAD
+
+    [All]
+
+    KOI POOK BEH POO
+    YOCH BOW MATH BOW JE SHUV WEEE
+    SAY MOACH CHU MAY EW...
+
+    [Martok orders, "Mahk-cha!" (Engage)]
+
+    MAH SHOOV MAH NONG EJ MA CHOCH CHEW
+    NEE BEH YIN MAHJ ACH WOV, COO!
+    BATH MA CHETH BEJJ EJ YO KEEJ DAHK
+    VAV POO MA DEE MUV PA RECH MA SHOOV TACH
+    KOO MA MEV KO MA SHOOV TACH MA OV
+
+    [laughter]
+
+    KOI KEH LESS POOK LOAD
+    KOI POOK BEH POO
+    YOCH BOW MATH BOW JE SHUV WEEE
+    SAY MOACH CHU MAY EW
+    MAH SHOOV MAH NONG
+    EJ MA CHOCH CHEW
+    NEE BEH YIN MAHJ ACH WOV, COO!
+    BATH MA CHETH BEJJ EJ YO KEEJ DAHK
+    VAV POO MA DEE MUV PA RECH MA SHOOV TACH
+    KOO MA MEV KO MA SHOOV TACH MA OV.
+
+    [fade out]
+
+Original Lyrics (by Hilary Bader)
+
+    Hear! Sons of Kahless.
+    Hear! Daughters too.
+    The blood of battle washes clean
+    The Warrior brave and true.
+    We fight, we love, and then we kill.
+    Our lives burn short and bright,
+    Then we die with honor and join our fathers in the Black Fleet where
+    we battle forever, battling on through the Eternal fight.
+
+Okrand's Translation
+
+    Qoy qeylIs puqloD.
+    Qoy puqbe'pu'.
+    yoHbogh matlhbogh je SuvwI'
+    Say'moHchu' may' 'Iw.
+    maSuv manong 'ej maHoHchu'.
+    nI'be' yInmaj 'ach wovqu'.
+    batlh maHeghbej 'ej yo' qIjDaq vavpu'ma' DImuv.
+    pa' reH maSuvtaHqu'.
+    mamevQo'. maSuvtaH. ma'ov.
+
+Okrand's literal back translation:
+
+    Hear! sons of Kahless.
+    Hear! daughters.
+    The battle blood perfectly cleans the warrior who is brave and loyal.
+    We fight, we're passionate, and we kill perfectly.
+    Our lives are not long, but they're very bright.
+    We certainly die, and we join our fathers in the Black Fleet.
+    There we always really continue fighting.
+    We won't stop. We continue fighting. We compete.
+
+[[eof]]
