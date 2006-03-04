@@ -1,0 +1,145 @@
+#!/bin/zsh
+#
+# midiparts2ogg - convert midi parts into ogg
+#
+# [2006-02-10, 02.28-04.05] v0.1 - written by Zrajm C Akfohg
+#
+# Takes a four part MIDI file (where soprano must = 1, alto = 2, tenor = 3 and
+# bass = 4) and generates nine files. Four with each part separately, and four
+# with each part mixed with the other parts mixed in at low volume, and one
+# with all four parts mixed at equal volume.
+#
+# Usage: ga DIR [volume]
+#
+# Volume is expressed in percent, and is the volume used for subdued parts, if
+# not specified 20% volume is used.
+
+emulate -RL zsh                                # reset zsh options
+setopt EXTENDED_GLOB                           # extended glob, never error
+
+
+if [[ -n ${(M)argv:#(-h|--help)} ]]; then
+    echo "Usage: midiparts2ogg [VOLUME] FILE ..."
+    echo 
+    echo "First occuring number on command line is taken to be the VOLUME (in percent) of"
+    echo "secondary parts, this defaults to 20%."
+    echo
+    echo "FILEs are expected to be midi files. All created files will wind up in same"
+    echo "directory as the original file. The following files are created for each midi"
+    echo "file:"
+    echo
+    echo "    FILE.ogg"
+    echo "    FILE-soprano.ogg"
+    echo "    FILE-alto.ogg"
+    echo "    FILE-tenor.ogg"
+    echo "    FILE-bass.ogg"
+    echo
+    echo "\`FILE.ogg' is in full volume. \`FILE-soprano.ogg' has midi device 1 (i.e. part"
+    echo "1) notes at 100% volume and devices 2, 3 and four at VOLUME. The same goes for"
+    echo "\`FILE-alto.ogg', although there device 2 (part 2) is the one at full volume." #'"
+    exit;
+fi
+
+
+# default volume for subdued parts (in %)
+i=$argv[(i)[0-9]#]                             # get any numeric arg
+if (( i <= ARGC )); then                       # if there was one
+    VOL=$argv[i]                               #   set volume accordingly
+    argv[i]=()                                 #   and remove number from args
+else                                           # otherwise
+    VOL=20                                     #   set volume to 20%
+fi                                             #
+
+
+setopt no_function_argzero
+output() {                                     #
+    local msg="${0:t}: $*"                     #
+    if [[ -t 1 ]]; then                        #
+        msg=$'\e[1m'"$msg"$'\e[0m'             #
+    fi                                         #
+    echo "$msg"                                #
+}                                              #
+
+
+
+foreach MIDI_FILE ($argv) {
+    BASE=${MIDI_FILE:r}
+
+    # create wave files for all four parts (from MIDI file)
+    # (each wave file contain a single part)
+    output "Generating wave file for 1st part.."
+    timidity -Ow -Q2,3,4 $MIDI_FILE -o ${BASE}-soprano_only.wav
+    output "Generating wave file for 2nd part.."
+    timidity -Ow -Q1,3,4 $MIDI_FILE -o ${BASE}-alto_only.wav
+    output "Generating wave file for 3rd part.."
+    timidity -Ow -Q1,2,4 $MIDI_FILE -o ${BASE}-tenor_only.wav
+    output "Generating wave file for 4th part.."
+    timidity -Ow -Q1,2,3 $MIDI_FILE -o ${BASE}-bass_only.wav
+
+    # all parts
+    # (combined from previous four wave files)
+    output "Generating Ogg file with all parts combined.."
+    ecasound -z:mixmode,sum                \
+        -a:1   -i:${BASE}-soprano_only.wav \
+        -a:2   -i:${BASE}-alto_only.wav    \
+        -a:3   -i:${BASE}-tenor_only.wav   \
+        -a:4   -i:${BASE}-bass_only.wav    \
+        -a:all -o:${BASE}.wav
+    oggenc        ${BASE}.wav &&       # convert to ogg
+    rm            ${BASE}.wav          #   and remove wave file
+
+    # soprano
+    # (soprano part at full volume, other parts subdued)
+    output "Generating Ogg file with 1st part highlighted.."
+    ecasound -z:mixmode,sum                         \
+        -a:1   -i:${BASE}-soprano_only.wav          \
+        -a:2   -i:${BASE}-alto_only.wav    -ea:$VOL \
+        -a:3   -i:${BASE}-tenor_only.wav   -ea:$VOL \
+        -a:4   -i:${BASE}-bass_only.wav    -ea:$VOL \
+        -a:all -o:${BASE}-soprano.wav
+    oggenc        ${BASE}-soprano.wav &&   # convert to ogg
+    rm            ${BASE}-soprano.wav      #   and remove wave file
+
+    # alto
+    # (alto part at full volume, other parts subdued)
+    output "Generating Ogg file with 2nd part highlighted.."
+    ecasound -z:mixmode,sum                         \
+        -a:1   -i:${BASE}-soprano_only.wav -ea:$VOL \
+        -a:2   -i:${BASE}-alto_only.wav             \
+        -a:3   -i:${BASE}-tenor_only.wav   -ea:$VOL \
+        -a:4   -i:${BASE}-bass_only.wav    -ea:$VOL \
+        -a:all -o:${BASE}-alto.wav
+    oggenc        ${BASE}-alto.wav &&      # convert to ogg
+    rm            ${BASE}-alto.wav         #   and remove wave file
+
+    # tenor
+    # (tenor part at full volume, other parts subdued)
+    output "Generating Ogg file with 3nd part highlighted.."
+    ecasound -z:mixmode,sum                         \
+        -a:1   -i:${BASE}-soprano_only.wav -ea:$VOL \
+        -a:2   -i:${BASE}-alto_only.wav    -ea:$VOL \
+        -a:3   -i:${BASE}-tenor_only.wav            \
+        -a:4   -i:${BASE}-bass_only.wav    -ea:$VOL \
+        -a:all -o:${BASE}-tenor.wav
+    oggenc        ${BASE}-tenor.wav &&     # convert to ogg
+    rm            ${BASE}-tenor.wav        #   and remove wave file
+
+    # bass
+    # (bass part at full volume, other parts subdued)
+    output "Generating Ogg file with 4th part highlighted.."
+    ecasound -z:mixmode,sum                         \
+        -a:1   -i:${BASE}-soprano_only.wav -ea:$VOL \
+        -a:2   -i:${BASE}-alto_only.wav    -ea:$VOL \
+        -a:3   -i:${BASE}-tenor_only.wav   -ea:$VOL \
+        -a:4   -i:${BASE}-bass_only.wav             \
+        -a:all -o:${BASE}-bass.wav
+    oggenc        ${BASE}-bass.wav &&      # convert to ogg
+    rm            ${BASE}-bass.wav         #   and remove wave file
+
+    # remove superflous wav files
+    rm  ${BASE}-soprano_only.wav \
+        ${BASE}-alto_only.wav    \
+        ${BASE}-tenor_only.wav   \
+        ${BASE}-bass_only.wav
+
+}
