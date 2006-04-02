@@ -1,0 +1,74 @@
+        \new Staff {
+            %\set Staff.instrument = "PianoTreble"
+            \new Voice {
+
+        \time 4/4
+        \clef treble
+        \key es \major
+        < f'' a' > 4 < f'' a' > < f'' bes' > < f'' c'' >  |
+        < es'' bes' > 4 < des'' bes' > < c'' a' > 2  |
+        < des'' f' > 4 < es'' ges' > < f'' aes' > < f'' aes' >  |
+        < es'' ges' > 4 < des'' f' > < c'' f' > 2  |
+        %% 5
+        < bes' f' > 4 < c'' f' > < des'' f' > < bes' ges' >  |
+        [ < bes' f' > 8 -\tenuto aes' ] < ges' es' > 4 < f' d' > 2  |
+        < ges' es' > 4 < aes' es' > < bes' e' > < bes' e' >  |
+        < aes' es' > 4 -\tenuto ges' < f' d' > 2  |
+        < bes' f' > 4 < a' es' > < bes' f' > < c'' ges' >  |
+        %% 10
+        < des'' f' > 4[ < c'' f' > 8 -\tenuto bes' ] < bes' ges' > 2  |
+        < des'' aes' > 4 < es'' aes' > < f'' aes' > < f'' bes' >  |
+        < es'' bes' > 4 -\tenuto-\staccato des''8[ c'' ] < c'' a' > 2  |
+        < bes' f' > 4 < c'' f' >[ < des'' f' > 8 -\tenuto c'' ] < bes' ges' > 4  |
+        [ < bes' f' > 8 -\tenuto aes' ] < ges' es' > 4 < f' d' > 2  |
+        %% 15
+        < ges' es' > 4 < aes' f' > < bes' ges' > < bes' ges' >  |
+        < aes' f' > 4 < ges' es' > -\tenuto f' -\tenuto des'  |
+        c'1  |
+ |
+         \bar "|."
+            } % Voice
+
+        } % Staff
+
+        \new Staff {
+            %\set Staff.instrument = "PianoBass"
+            \new Voice {
+        \override Voice.TextScript #'padding = #2.0
+
+        \time 4/4
+        \clef tenor
+        \key es \major
+        < c' f > 4 < c' f > < des' bes >[ < c' aes > 8 -\tenuto des' ]  |
+        [ < es' ges > 8( f' < ges' f > es )] < c' f > 2  |
+        < bes bes > 4 < bes ges > < b d > < bes d >  |
+        < bes es > 4 -\tenuto bes, < a f > 2  |
+        %% 5
+        < des' bes > 4 < c' a >[ < bes bes > 8 -\tenuto c' < des' ges > -\tenuto es' ]  |
+        [ < f' d > 8 -\tenuto bes ] < bes es > 4 < bes bes, > 2  |
+        < bes es > 4 < b b, > < des' g, > < des' g, >  |
+        [ < b aes, > 8 -\tenuto des' ] < es' a, > 4 < bes bes, > 2  |
+        < des' bes, > 4 < c' c > < bes des > < bes es >  |
+        %% 10
+        [ < bes f > 8 -\tenuto aes ] < des' des > 4 < des' ges > 2  |
+        < f' f > 4 < c' aes >[ < des' des' > 8( c' < des' bes > aes )]  |
+        [ < es' ges > 8( f' < ges' f > es )] < f' f > 2  |
+        < bes des > 4 < a f >[ < bes bes > 8 < c' aes > < des' ges > -\tenuto es' ]  |
+        [ < f' d > 8 -\tenuto bes ] < bes es > 4 < bes bes, > 2  |
+        %% 15
+        < bes es > 4 < des' des >[ < des' ges, > 8( aes, < des' bes, > b, )]  |
+        [ < des' des > 8 -\tenuto b ] < bes es > 4 < a f > -\tenuto bes  |
+        a1  |
+ |
+         \bar "|."
+            } % Voice
+
+        } % Staff(final)
+    >> % ChoirStaff
+    \layout { papersize = "a4" }
+    \midi {
+        \tempo 4 = 70
+    } 
+} % score
+
+%[[eof]]
