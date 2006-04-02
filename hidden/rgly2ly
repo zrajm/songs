@@ -1,0 +1,85 @@
+#!/usr/bin/perl -w
+#
+# [2006-03-06, 15:18-15:57] v0.1 - started writing
+#
+# [2006-03-07, 00:28-00:51] v0.2 - added commenting, removal and rewriting of
+# several of Rosegarden's own Lilypond directives
+#
+# [2006-03-30, 01:47-03:07] v0.3 - fix for broken beamings, as well as some
+# minor bracke/parathesis fixing
+#
+# TODO:
+#   o auto adjust order of \clef / \key / \time attributes
+#   o comment out the midi section
+#   o change "\clef treble" to `\clef "treble_8"' in tenor-part
+#   o add last Staff.instrument to `} % Staff' comments (`} % Staff (<instr>)'
+#
+
+# matches a note name (but not its length)
+$note = qr/\b[a-g] (?:es|is|(?<=e)s)? [',]*/x;
+
+undef $/;
+while (<>) {
+    /\\version "2\.6\.0"/ or die "not lilypond document v2.6.x!\n";
+
+    # remove superfluous space
+    s/ +$//;                                   # strip space at end-of-line
+    s/($note) [\t ]+ ([0-9]+)/$1$2/gox;        # strip space between note/length
+    s/($note[0-9]*[.?!]*) [\t ]+ \(/$1(/gox;   # remove space before `('
+    s/ -\\fermata/\\fermata/g;                 # remove ` -' before \fermata
+
+    # fix Rosegarden's braindead beamings
+    # FIXME: allow for text marks after notes
+    s{\[ \s*                                   # change `[ note1 note2 ]' into
+        (   $note[0-9]* (?:\s*[()])? )  \s*    #   `note1[ note2 ]'
+        (\s*$note[0-9]* (?:\s*[()])? )* \s*    #
+      \]                                       #
+    }{$1 [ $2 ]}gx;                            #
+    s{ (?<=[^\s]) [\t ]* ([\[(])}{$1}gx;       #
+    s{ (?<=[\])]) [\t ]* ([\])])}{$1}gx;       # strip space before ] or )
+                                               # (when preceded by ] or ])
+
+    # fix bracket/paranthesis order (where possible)
+    my $np = qr/[^\[\]\(\)]*/;                 #
+    s{ ( \(   $np \[ $np ) \)\] }{$1])}gx;     # (x[y)] -> (x[y])
+    s{ ( \[   $np \( $np ) \]\) }{$1)]}gx;     # [x(y]) -> [x(y)]
+    s{ \(\[ ( $np \) $np   \] ) }{[($1}gx;     # ([x)y] -> [(x)y]
+    s{ \[\( ( $np \] $np   \) ) }{([$1}gx;     # [(x]y) -> ([x]y)
+
+
+    # add translation of Rosegarden's text marks
+    # FIXME: text markup should be able to handle backslash escaping
+    # (of " primarily)
+    # FIXME: replace *all* standalone "b"s and "#"es with \flat and \sharp
+    # (and not just if they occur alone)
+    s[\s* _\#'\(italic \s* "([^"]*)"\)][
+        if ($1 eq "b") {
+            "^\\markup\\flat";
+        } elsif ($1 eq "\#") {
+            "^\\markup\\sharp";
+        } else {
+            "^\"$1\"";
+        }
+    ]gex;
+
+
+    # deal with Rosegarden's inserted commands
+    s/^( *)\\context (Voice|Staff) = "[^"]*" *(\<\<|\{) *$/$1\\new $2 {/gm;
+    s/^( *)>> % Staff\b(.*)$/$1} % Staff$2/gm;
+    s/(\\set Staff.instrument)/%$1/gm;         # comment out Staff.instrument
+    # strip superfluous commands inserted by Rosegarden
+    s/^ *\\override Voice\.TextScript #'padding = #2.0 *\n$//m;
+    s/\#\((set-global-staff-size) +20\)/#($1 18)/;
+        # change "set-global-staff-size" to 18
+
+    s/(\\score {\n)\s*\<\</$1    \\new ChoirStaff <</;
+    s/>> % notes/>> % ChoirStaff/;
+
+
+    s/^(%% [0-9]+)$/" "x(4*4)."$1"/egm;        # indent measure count comment
+
+    $_ .= "\n%[[eof]]";                        # add `[[eof]]'
+} continue {
+    print or die "-p destination: $!\n";
+}
+
