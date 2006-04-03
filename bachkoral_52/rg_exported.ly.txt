@@ -1,0 +1,81 @@
+\version "2.6.0"
+\header {
+    copyright = "Unknown"
+    subtitle = "blank"
+    title = "Untitled"
+    tagline = "Exported by Rosegarden 4-1.0"
+    footer = "Rosegarden 4-1.0"
+}
+#(set-global-staff-size 18)
+\score {
+    \new ChoirStaff <<
+        % force offset of colliding notes in chords:
+        \override Score.NoteColumn #'force-hshift = #1.0
+
+        \new Staff {
+            %\set Staff.instrument = "PianoTreble"
+            \new Voice {
+        \override Voice.TextScript #'padding = #2.0
+
+        \time 4/4
+        \clef treble
+        \key c\major
+
+        \repeat volta 2 {
+            \partial 4 < c' g >  |
+            < g' c' > 4 < g' e' > < a' f' > < b' e' >  |
+            < c'' e' > 2 < c'' e' > 4 < e'' a' >  |
+            < d'' a' > 4 < c'' f' > < c'' e' > < b' d' >  |
+            < c'' e' > 2.
+        }
+        \partial 4 [ < c'' e' > 8 < d'' f' > ]  |
+        %% 5
+        < e'' g' > 4 < e'' a' > < d'' a' > < c'' fis' >  |
+        [ < b' g' > 8 < a' fis' > ] < b' g' > 4 < g' d' > < b' g' >  |
+        < c'' g' > 4 < b' g' > < a' g' > < a' fis' >  |
+        %% 10
+        < g' d' > 2. < g' d' > 4  |
+        [ < e' c' > 8 < f' d' > ] < g' e' > 4 < a' f' > < g' e' >  |
+        < g' e' > 4 < f' d' > < e' c' > < g' c' >  |
+        < f' c' > 4 < e' c' > < d' c' > < d' b >  |
+        < c' g > 2.
+        \bar "|."
+            } % Voice
+
+        } % Staff
+
+        \new Staff {
+            %\set Staff.instrument = "PianoBass"
+            \new Voice {
+        \override Voice.TextScript #'padding = #2.0
+
+        \time 4/4
+        \clef tenor
+        \key c\major
+
+        \repeat volta 2 {
+            \partial 4 < e c >  |
+            < g e > 4 < c' c > < c' f > < b gis, >  |
+            < a a, > 2 < a a, > 4 < c' a >  |
+            < a f > 4 < a d > < g g > < g g, >  |
+            < g c > 2.
+        }
+        \partial 4 < g c > 4  |
+        %% 5
+        [ < c' c' > 8( b < c' a > g )] < d' fis > 4 < d' d >  |
+        [ < d' g > 8 -\tenuto c' ] d'4 < b g, > < d' f >  |
+        < c' e > 4 < d' d > < e' c >[ < d' d > 8 -\tenuto c' ]  |
+        %% 10
+        < b g, > 2. < g b, > 4  |
+        < g c > 4 < c' ais, >[ < c' a, > 8 -\tenuto b, ] < ais cis > 4  |
+        < a d > 2 < a a, > 4 < e ais, >  |
+        < f a, > 4 < g g, > < a fis, >[ < g g, > 8 -\tenuto f ]  |
+        < e c > 2.
+        \bar "|."
+            } % Voice
+
+        } % Staff
+
+} % score
+
+%[[eof]]
