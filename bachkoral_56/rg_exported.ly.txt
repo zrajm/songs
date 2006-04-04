@@ -1,0 +1,72 @@
+#(set-global-staff-size 18)
+\score {
+    \new ChoirStaff <<
+        % force offset of colliding notes in chords:
+        \override Score.NoteColumn #'force-hshift = #1.0
+        \time 4/4
+
+
+        \new Staff {
+            %\set Staff.instrument = "PianoTreble"
+            \new Voice {
+        \override Voice.TextScript #'padding = #2.0
+
+        \time 4/4
+        \clef treble
+        \key f \major
+        < a' f' > 4 < g' e' > < f' f' > < g' e' >  |
+        [ < a' f' > 8 -\tenuto e' ] < b' d' > 4 < c'' e' > 2  |
+        < d'' g' > 4 < c'' g' > < bes' e' >[ < a' f' > 8 -\tenuto g' ]  |
+        < g' f' > 4 -\tenuto e' < f' c' > 2  |
+        %% 5
+        < a' f' > 4 < c'' g' > < bes' f' > < a' e' >  |
+        < g' d' > 4 < f' d' > < e' des' > 2  |
+        < f' a > 4 < g' c' > < a' c' >[ < a' c' > 8 -\tenuto bes'16 c'' ]  |
+        < bes' f' > 4 -\tenuto g' < a' f' > 2  |
+        < a' f' > 4 < bes' f' > < c'' f' > < bes' f' >  |
+        %% 10
+        < a' f' > 4 < g' e' > < a' f' > 2  |
+        < g' e' > 4 < g' c' >[ < a' f' > 8 -\tenuto b' ] < c'' e' > 4  |
+        < c'' d' > 4 -\tenuto b' < c'' e' > 2  |
+        < c'' ees' > 4 < a' ees' >[ < d'' d' > 8( e' f' c'' )]  |
+        [ < bes' f' > 8 -\tenuto e' < a' f' > -\tenuto g' ] < g' e' > 2  |
+        %% 15
+        < a' f' > 4 < c'' g' > < bes' f' >[ < a' f' > 8 -\tenuto g' ]  |
+        < g' f' > 4 -\tenuto e' < f' c' > 2  |
+        \bar "|."
+            } % Voice
+
+        } % Staff
+
+        \new Staff {
+            %\set Staff.instrument = "PianoBass"
+            \new Voice {
+        \override Voice.TextScript #'padding = #2.0
+
+        \time 4/4
+        \clef tenor
+        \key f \major
+        < c' f > 4 < c' c > < c' a, > < c' c >  |
+        < c' f, > 4 < g g, > < g c > 2  |
+        < bes g > 4 < g e > < c' c > < c' f >  |
+        < d' bes, > 4[ < c' c > 8 -\tenuto bes ] < a f, > 2  |
+        %% 5
+        < c' f > 4 < c' e > < d' d > < a c >  |
+        < bes bes, > 4[ < bes a, > 8 -\tenuto g, ] < e a, > 2  |
+        < d d > 4 < e c > < f f > < g e >  |
+        < d' d > 4 < c' e > < c' f > 2  |
+        < c' f > 4 < bes d > < a a, > < g bes, >  |
+        %% 10
+        [ < a c > 8 -\tenuto bes ] < c' c > 4 < c' f, > 2  |
+        [ < c' c > 8 -\tenuto d ] < g e > 4 < f d > < g c >  |
+        < a f > 4 < g g > < g c > 2  |
+        < ges ees > 4 < f f >[ < f bes, > 8 -\tenuto g ] < a a, > 4  |
+        < bes g, > 4 < c' f, > < c' c > 2  |
+        %% 15
+        < c' f > 4 < c' e > < d' d > < d' c >  |
+        < d' b, > 4[ < c' c > 8 -\tenuto bes ] < a f, > 2  |
+        \bar "|."
+            } % Voice
+        } % Staff(final)
+
+%[[eof]]
