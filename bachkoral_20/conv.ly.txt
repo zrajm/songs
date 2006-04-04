@@ -1,0 +1,45 @@
+\version "2.6.0"
+\header {
+    dedication = \markup \small "http://zrajm.klingonska.org/songs/"
+    title = "Bachkoral nr. 20"
+    subtitle = ""
+    composer = "J.S. Bach (1685-1750)"
+    copyright = "Zrajm C Akfohg, mars 2006"
+    tagline = ""
+}
+#(set-global-staff-size 16)
+\paper {
+    raggedbottom = ##t
+    printpagenumber = ##f  % turn on/off page number printing
+}
+
+
+% Swedish lyrics
+lyricSvOne = \lyricmode {
+}
+% Original German lyrics
+lyricDeOne = \lyricmode {
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %% FIXME: Hyphenation needs to be fixed for German lyrics to work! %%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}
+
+
+\score {
+
+            } % Voice
+            \addlyrics { \lyricSvOne }
+        } % Staff (Bass)
+    >> % ChoirStaff
+
+    \layout {
+        papersize = "a4"
+        \context {
+            \Voice \consists Ambitus_engraver
+        }
+    }
+    %\midi { \tempo 4 = 80 }
+
+} % score
+
+%[[eof]]
