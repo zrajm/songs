@@ -1,0 +1,88 @@
+Changes to Bach chorals (and other notes):
+
+    o Additional left margin to allow for holes for folder placement.
+      (how to make this work for even/odd pages when printing double sided? --
+      wide margin on both sides?)
+
+        % A4: is 210×297 mm
+        % Allow for holes in left margin
+        %leftmargin      = 20\mm
+        %FIXME:
+        %#(define linewidth (- (- (* 21 cm) (* 2 cm)) (* 1 cm))) % A4 is 21 cm wide
+        %%rightmargin    =  ??   % not implemented in Lilypond 2.6.x
+
+    o Staff size of 16 is *too small*. Looks good, but is needlessly difficult
+      to use in practice. Maybe 18 is better? -- Is it possible to place
+      lyrics closer to the notes though? Also, can multiple lyrics to same
+      notes, could they be placed closer together to allow for at three
+      systems on each page, even when there is two verses present?
+
+    o Add a left arrow below lowest system on page to indicate where a page
+      break occurs. (It is not always easy to anticipate, esp. not when
+      singing for the first time.)
+
+    o Number all measures for easier reference.
+
+
+
+in Makefile:
+  o MIDI renamer should compare midi with any previousy existing -- so that we
+    don't need to regenerate all oggs etc if sound outout from lilypond is
+    identical to any previous compile
+
+  o Option to disable piano part? (or generate files both with and without
+    it? = *many* files!)
+
+  o Targets for building jpeg files.
+
+  o Targets for building mixes of various kinds: alto+soprano+piano, alto+bass
+    etc. (Can this be done dynamically somehow?)
+
+FIXME: rgly2ly
+
+re-beaming should be able to cope with:
+
+    [ a8. bes16 ] c'8[ g ] a4\fermata
+    bachkoral_40.ly:287:41: error: errors found, ignoring music expression
+
+    and chords (which, apparently may look like this "< a b > 2.")
+
+    in Choral 56, there's a problem in the soprano voice with something that
+    may have looked like this in the Rosegarden exported original:
+
+      [ a'8 bes'16 ( c'' ) ]
+
+
+move all Staff.Instrument inside Voice context
+
+
+\midi output (but *only* midi) should expand all repeats (unfold-repeats or
+\unfoldRepeats) during processing
+
+
+
+
+When exporting to Lilypond from Rosegarden the followng is written (after
+apropriate convert-ly) `ais _#'(italic "b")' this is better expressed in
+lilypond 2.6.x as `ais ^\markup\flat', but should be translated into a simle
+"bes", actually. (This way any wrongly flattened, or sharpened notes could be
+corrected in Rosegarden, and this change could be retained.)
+
+
+For att fa linjera up lattext olika gentemot noter, se:
+
+http://lilypond.org/doc/v2.6/Documentation/user/lilypond.html#Flexibility-in-alignment
+
+
+
+
+Textnotering till enskilda noter:
+
+http://lilypond.org/doc/v2.6/Documentation/user/lilypond.html#Text
+
+
+bachkoral_21 contains experimental code for generating midifiles with lilypond
+
+
+(Auto-)insert an arrow below notes when page breaking (an utf8 arrow: →)
+
