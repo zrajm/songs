@@ -1,0 +1,35 @@
+###############################################################################
+##                                                                           ##
+##  Apache web server settings (Local for this dir & subdirs).               ##
+##                                                                           ##
+##  NOTE: Comments are *only* allowed on separate lines.                     ##
+##                                                                           ##
+##  /zrajm [2001-01-21] -- [2006-02-23]                                      ##
+##                                                                           ##
+###############################################################################
+
+
+# Add the following files before and after the file directory menu. (The HTML
+# preamble, including <HTML> tag and e.g. page logo must be included in
+# ".dirhead.html" since SuppressHTMLPreamble is turned on above).
+HeaderName .dirhead.html
+ReadmeName .dirfoot.html
+
+
+# wiki is in unicode
+AddCharset UTF-8 .ly .txt
+
+# Hide parent directory.
+#IndexIgnore ..
+
+# hide the following directories
+IndexIgnore notguide hidden
+
+# filbeskrivningar (visas i "Description" kolumnen)
+AddDescription "Bach, J.S." koral_
+AddDescription "Certon, Pierre" la_la_la_vagar_jag_beratta
+AddDescription "Dowland, John" come_again now_o_now
+AddDescription "Vecchi, Orazio" so_ben_mi_chha_bon_tempo
+AddDescription "Bader, Hilary J." suvwi_van_bom
+
+#[[eof]]
