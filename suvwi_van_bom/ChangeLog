@@ -1,0 +1,7 @@
+2006-02-17: Transcribed notes from GIF file, which I downloaded off the 'net
+several years ago.
+
+2006-12-13: Upgraded lilypond source from version 2.6.5, to 2.8.8. Added MIDI
+file output. Made several prettifications of score (e.g. replaced slurs with
+beams, increased spacing in lyrics to improve readability, turned page into
+landscape mode).
